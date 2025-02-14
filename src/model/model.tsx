@@ -1,43 +1,34 @@
 import * as THREE from 'three';
-import { useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage, useGLTF } from '@react-three/drei';
+import { useState, useEffect } from 'react';
 
+import { Geo, Rgb, Ent, Mesh } from "./interface"
 
-interface Geo 
+const createMeshes = (geo: Geo[], ent: Ent[], rgb: Rgb[]): Mesh[] =>
 {
-    id: number
-    name?: string
-    geo?: THREE.BufferGeometry
-}
+    return geo.map((geoItem) =>
+    {
+        // Find the corresponding ent and rgb items by id
+        const meshEnt = ent.find((e) => e.id === geoItem.id) || ({} as Ent);
+        const meshRgb = rgb.find((r) => r.id === geoItem.id) || ({} as Rgb);
 
-interface Rgb
-{
-    id: number
-    rgb: string
-}
-
-interface Ent
-{
-    id: number
-    ent?: {
-        type: number
-        centerUv: number[]
-        centerPoint: number[]
-        centerNormal: number[]
-        area: number
-        minRadius: number
-        minPosRadius: number
-        minNegRadius: number
-        edgeCurveChains: any[]
-    }
-}
+        // Create a new Mesh using the spread operator for each part
+        return {
+            id: geoItem.id,
+            geo: { ...geoItem },
+            ent: { ...meshEnt },
+            rgb: { ...meshRgb },
+        };
+    });
+};
 
 export default function PartLoader ()
 {
     const [geo, setGeo] = useState<Geo[]>([]);
     const [rgb, setRgb] = useState<Rgb[]>([]);
     const [ent, setEnt] = useState<Ent[]>([]);
+    const [meshes, setMeshes] = useState<Mesh[]>([]);
 
     const getEnt = async () =>
     {
@@ -59,7 +50,7 @@ export default function PartLoader ()
             },
         }));
 
-        console.log("ENT", E)
+        console.log("ENT", E);
         setEnt(E);
     };
 
@@ -70,7 +61,6 @@ export default function PartLoader ()
 
         const R: Rgb[] = Object.entries(data).map(([rgb, id]) =>
         {
-            // convert "187-4-105" -> ["187", "4", "105"] -> "rgb(187, 4, 105)"
             const [R, G, B] = rgb.split("-");
             const RGB = `rgb(${R},${G},${B})`;
 
@@ -80,7 +70,7 @@ export default function PartLoader ()
             };
         });
 
-        console.log("RGB", R)
+        console.log("RGB", R);
         setRgb(R);
     };
 
@@ -109,59 +99,28 @@ export default function PartLoader ()
 
     useEffect(() =>
     {
-        getRgb()
-        getEnt()
-        getGeo()
-
-    }, [scene])
-
-    /*
-
-    // Load the GLB/GLTF model
-    const { scene } = useGLTF('./colored_glb.glb');
-
-    useEffect(() =>
-    {
-        if (!scene) return;
-
-        const g: Geo[] = [];
-
-        scene.traverse((obj) =>
-        {
-            if ((obj as THREE.Mesh).isMesh) {
-                const mesh = obj as THREE.Mesh;
-
-                g.push({
-                    id: parseInt(mesh.name.split('_').pop() || '0', 10),
-                    name: mesh.name,
-                    geo: mesh.geometry,
-                });
-            }
-        });
-
-        setGeo(g);
-
+        getRgb();
+        getEnt();
+        getGeo();
     }, [scene]);
 
-
-
     useEffect(() =>
     {
-        if (geo.length === 0) return
-
-        console.log(geo)
-
-    }, [geo])
-*/
+        if (geo.length && ent.length && rgb.length) {
+            const combinedMeshes = createMeshes(geo, ent, rgb);
+            console.log("Combined Meshes:", combinedMeshes);
+            setMeshes(combinedMeshes);
+        }
+    }, [geo, ent, rgb]);
 
     return (
-        <Canvas shadows gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [4, 5, 2], fov: 35 }}>
+        <Canvas shadows gl={{ antialias: false }} dpr={[1, 1.5]} camera={{ position: [4, 3, 2], fov: 35 }}>
             <OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 1.9} />
-            <Stage intensity={0.5} preset="rembrandt" shadows="contact" adjustCamera={3}>
+            <Stage intensity={0.9} preset="rembrandt" shadows="contact" adjustCamera={3}>
                 <group>
-                    {geo.map((item, index) => (
-                        <mesh key={index} geometry={item.geo}>
-                            <meshStandardMaterial />
+                    {meshes.map((mesh, index) => (
+                        <mesh key={index} geometry={mesh.geo.geo}>
+                            <meshStandardMaterial color={mesh.rgb.rgb} />
                         </mesh>
                     ))}
                 </group>
