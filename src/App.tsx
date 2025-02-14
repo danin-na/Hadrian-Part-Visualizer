@@ -1,3 +1,4 @@
+import PartLoader from "./partLoader/partLoader"
 
 function App ()
 {
@@ -5,6 +6,7 @@ function App ()
   return (
     <>
       hellow word
+      <PartLoader />
     </>
   )
 }
