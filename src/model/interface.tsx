@@ -4,7 +4,7 @@ export interface Geo
 {
     id: number
     name?: string
-    geo?: THREE.BufferGeometry
+    geo: THREE.BufferGeometry
 }
 
 export interface Rgb
@@ -16,7 +16,7 @@ export interface Rgb
 export interface Ent
 {
     id: number
-    ent?: {
+    ent: {
         type: number
         centerUv: number[]
         centerPoint: number[]
@@ -31,8 +31,20 @@ export interface Ent
 
 export interface Mesh
 {
-    id: number
-    geo: Geo
-    ent: Ent
-    rgb: Rgb
+    id: number;
+    name?: string;
+    geo: THREE.BufferGeometry;
+    rgb: string;
+    ent: {
+        type: number;
+        centerUv: number[];
+        centerPoint: number[];
+        centerNormal: number[];
+        area: number;
+        minRadius: number;
+        minPosRadius: number;
+        minNegRadius: number;
+        edgeCurveChains: any[];
+    };
 }
+
