@@ -43,7 +43,7 @@ interface EntityGeometryInfo
     edgeCurveChains: EdgeCurveChain[];
 }
 
-export interface Model
+interface Model
 {
     id: number;
     color: string;
