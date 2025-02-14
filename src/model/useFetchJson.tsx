@@ -19,4 +19,3 @@ export function useFetchJson (url: string)
 
     return { data };
 }
-
