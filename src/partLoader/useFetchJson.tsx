@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useFetchJson (url: string)
+export function useFetchJson (url: string)
 {
     const [data, setData] = useState(null);
 
@@ -20,4 +20,3 @@ function useFetchJson (url: string)
     return { data };
 }
 
-export default useFetchJson;
