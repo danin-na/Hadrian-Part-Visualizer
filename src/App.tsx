@@ -1,4 +1,4 @@
-import PartLoader from "./partLoader/partLoader"
+import PartLoader from "./model/model"
 
 function App ()
 {
