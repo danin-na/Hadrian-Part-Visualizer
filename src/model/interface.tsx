@@ -1,37 +1,7 @@
 import * as THREE from 'three';
 
-export interface Geo 
-{
-    geo: {
-        id: string
-        name?: string
-        source: THREE.BufferGeometry
-    }
-}
 
-export interface Rgb
-{
-    rgb: {
-        id: string
-        code: string
-    }
-}
 
-export interface Ent
-{
-    ent: {
-        id: string
-        type: number
-        centerUv: number[]
-        centerPoint: number[]
-        centerNormal: number[]
-        area: number
-        minRadius: number
-        minPosRadius: number
-        minNegRadius: number
-        edgeCurveChains: any[]
-    }
-}
 
 
 export interface Cnc 
@@ -52,16 +22,6 @@ export interface Nbr
         neighbors: string[]
         neighbors_number: number
     }
-}
-
-
-export interface Mesh
-{
-    id: string
-    geo: Geo
-    ent: Ent
-    rgb: Rgb
-    cnc: Cnc
 }
 
 

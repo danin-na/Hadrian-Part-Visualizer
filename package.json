@@ -13,6 +13,8 @@
     "@react-three/drei": "^9.121.5",
     "@react-three/fiber": "^8.17.14",
     "@tailwindcss/vite": "^4.0.6",
+    "@types/lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss": "^4.0.6"
