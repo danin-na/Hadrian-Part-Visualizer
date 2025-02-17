@@ -6,7 +6,6 @@ interface interfaceRGB
     rgb: {
         code: string;
     }
-
 }
 
 interface interfaceGEO
