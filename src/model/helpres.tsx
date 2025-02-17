@@ -1,122 +1,110 @@
-import { Geo, Rgb, Ent, Nbr, Cnc, Mesh } from './interface'
-import * as THREE from 'three';
+import _ from "lodash";
+import * as THREE from "three";
+import { interfaceGEO, interfaceRGB, interfaceENT, interfaceNBR } from "./heplpers_interface";
 
-const NBR_URL = "'./rgb_id_to_entity_id_map.json'"
-
-export async function getRgb (): Promise<Rgb[]>
+const useFetchGEO = async (group: THREE.Group): Promise<interfaceGEO[]> =>
 {
-    const response = await fetch('./rgb_id_to_entity_id_map.json');
-    const data = await response.json();
-
-    const rgbArray: Rgb[] = Object.entries(data).map(([rgb, id]) =>
-    {
-        const [R, G, B] = rgb.split('-');
-        return {
-            rgb: {
-                id: id as string,
-                code: `rgb(${R},${G},${B})`,
-            },
-        };
-    });
-
-    console.log('RGB', rgbArray);
-    return rgbArray;
-}
-
-export async function getNbr (): Promise<Nbr[]>
-{
-    const response = await fetch(NBR_URL);
-    const data = (await response.json()) as Record<string, string[]>;
-
-    const nbrArray: Nbr[] = Object.entries(data).map(([id, neighbors]) => ({
-        nbr: {
-            id,
-            neighbors,
-            neighbors_number: neighbors.length,
-        },
-    }));
-
-    console.log('nbrArray', nbrArray);
-    return nbrArray;
-}
-
-export async function getEnt (): Promise<Ent[]>
-{
-    const response = await fetch('./entity_geometry_info.json');
-    const data = await response.json();
-
-    const entArray: Ent[] = data.map((item: any) => ({
-        ent: {
-            id: item.entityId,
-            type: item.entityType,
-            centerUv: item.centerUv,
-            centerPoint: item.centerPoint,
-            centerNormal: item.centerNormal,
-            area: item.area,
-            minRadius: item.minRadius,
-            minPosRadius: item.minPosRadius,
-            minNegRadius: item.minNegRadius,
-            edgeCurveChains: item.edgeCurveChains,
-        },
-    }));
-
-    console.log('ENT', entArray);
-    return entArray;
-}
-
-export async function getCnc (): Promise<Cnc[]>
-{
-    const response = await fetch('./adjacency_graph_edge_metadata.json')
-    const data = await response.json();
-
-    const C: Cnc[] = Object.entries(data)
-        .map(([key, value]) =>
-        {
-            if (value.includes(0) as number) {
-                const [id1, id2] = key.split('-');
-                return {
-                    cnc: {
-                        id: id1,
-                        sss: true,
-                    },
-                };
-            } else {
-                const [id1, id2] = key.split('-');
-                return {
-                    cnc: {
-                        id: id1,
-                        sss: false,
-                    },
-                };
-            }
-
-        });
-
-    console.log("CNC", C)
-    return C
-};
-
-export async function getGeo (scene: THREE.Group | null): Promise<Geo[]>
-{
-    if (!scene) return [];
-
-    const g: Geo[] = [];
-    scene.traverse((obj) =>
+    const meshes: THREE.Mesh[] = [];
+    group.traverse((obj) =>
     {
         if ((obj as THREE.Mesh).isMesh) {
-            const mesh = obj as THREE.Mesh;
-            g.push({
-                geo: {
-                    id: mesh.name.split('_').pop() || '0',
-                    name: mesh.name,
-                    source: mesh.geometry,
-                },
-            });
+            meshes.push(obj as THREE.Mesh);
         }
     });
 
-    console.log('GEO', g);
-    return g;
+    const newGEO = _.chain(meshes)
+        .map((mesh: THREE.Mesh) =>
+        {
+            const [name, num, id] = mesh.name.split('_');
+            return {
+                id: String(id),
+                name: mesh.name,
+                geo: mesh.geometry,
+            };
+        })
+        .value();
+
+    return newGEO;
+};
+
+const useFetchRGB = async (url: string): Promise<interfaceRGB[]> =>
+{
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const newRGB = _.chain(data)
+        .toPairs()
+        .map(([code, id]) =>
+        {
+            const [R, G, B] = code.split('-');
+            return {
+                id: String(id),
+                rgb: { code: `rgb(${R},${G},${B})` },
+            };
+        })
+        .sortBy(item => Number(item.id))
+        .value();
+
+    return newRGB;
+};
+
+const useFetchNBR = async (url: string): Promise<interfaceNBR[]> =>
+{
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const newNBR = _.chain(data)
+        .toPairs()
+        .map(([id, neighbors]) => ({
+            id: String(id),
+            nbr: {
+                neighbors: [String(neighbors)],
+                neighbors_number: neighbors.length,
+            },
+        }))
+        .sortBy(item => Number(item.id))
+        .value();
+
+    return newNBR;
+};
+
+const useFetchENT = async (url: string): Promise<interfaceENT[]> =>
+{
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const newENT = _.chain(data)
+        .map((ent) => ({
+            id: ent.entityId,
+            ent: {
+                type: ent.entityType,
+                centerUv: ent.centerUv,
+                centerPoint: ent.centerPoint,
+                centerNormal: ent.centerNormal,
+                area: ent.area,
+                minRadius: ent.minRadius,
+                minPosRadius: ent.minPosRadius,
+                minNegRadius: ent.minNegRadius,
+                edgeCurveChains: ent.edgeCurveChains,
+            },
+        }))
+        .sortBy(item => Number(item.id))
+        .value();
+
+    return newENT;
+};
+
+export type {
+    interfaceGEO,
+    interfaceRGB,
+    interfaceENT,
+    interfaceNBR
 }
 
-
+export
+{
+    useFetchGEO,
+    useFetchRGB,
+    useFetchENT,
+    useFetchNBR
+}
