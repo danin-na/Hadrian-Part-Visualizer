@@ -94,7 +94,8 @@ const useFetchENT = async (url: string): Promise<interfaceENT[]> =>
     return newENT;
 };
 
-export type {
+export type
+{
     interfaceGEO,
     interfaceRGB,
     interfaceENT,
