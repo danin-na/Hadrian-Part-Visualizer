@@ -1,12 +1,6 @@
 import _ from "lodash";
 import * as THREE from "three";
-import
-{
-    interfaceGEO,
-    interfaceRGB,
-    interfaceENT,
-    interfaceNBR
-} from "./loader_interface";
+import { interfaceGEO, interfaceRGB, interfaceENT, interfaceNBR } from "./loader_interface";
 
 const useFetchGEO = async (group: THREE.Group): Promise<interfaceGEO[]> =>
 {
