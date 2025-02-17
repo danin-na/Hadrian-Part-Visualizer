@@ -42,7 +42,8 @@ interface interfaceNBR
     }
 }
 
-export type {
+export type
+{
     interfaceENT,
     interfaceGEO,
     interfaceNBR,
