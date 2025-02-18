@@ -1,65 +1,46 @@
-const GeoGroup = ({
-    geo,
-    wireframe,
-    color,
-    onMeshClick,
-    groupName,
-}: {
-    geo: any[]
-    wireframe: boolean
-    color?: string
-    onMeshClick: (mesh: any) => void
-    groupName: string
-}) => (
-    <group name={groupName} position={[0, 0, 0]}>
-        {geo.map((meshData) => (
-            <mesh
-                key={meshData.id}
-                geometry={meshData.geo}
-                onClick={() => onMeshClick(meshData)}
-            >
-                <meshStandardMaterial
-                    color={color || meshData.rgb?.code}
-                    wireframe={wireframe}
-                />
-            </mesh>
-        ))}
-    </group>
-)
+// MeshRenderer.tsx
+import React from "react";
+import * as THREE from "three";
 
-export const RenderMesh = ({
-    geo1,
-    geo2,
-    wireFrame1 = false,
-    wireFrame2 = false,
-    color1,
-    color2,
-    onMeshClick = () => { },
-}: {
-    geo1: any[]
-    geo2?: any[]
-    wireFrame1?: boolean
-    wireFrame2?: boolean
-    color1?: string
-    color2?: string
-    onMeshClick?: (mesh: any) => void
-}) => (
-    <>
-        <GeoGroup
-            geo={geo1}
-            color={color1}
-            wireframe={wireFrame1}
-            onMeshClick={onMeshClick}
-            groupName="geo1"
-        />
-        {geo2 && geo2.length > 0 && (
-            <GeoGroup
-                geo={geo2}
-                color={color2}
-                wireframe={wireFrame2}
-                onMeshClick={onMeshClick}
-                groupName="geo2"
-            />
-        )}
-    </>
-)
+export interface MeshData
+{
+    id: string;
+    _geo: THREE.BufferGeometry;
+    _rgb: {
+        code: string;
+        wire: boolean;
+    };
+}
+
+interface MeshRendererProps
+{
+    meshes: MeshData[];
+    modifyMesh?: (mesh: MeshData) => { color?: string; wireframe?: boolean };
+}
+
+const MeshRenderer: React.FC<MeshRendererProps> = ({ meshes, modifyMesh }) =>
+{
+    return (
+        <group position={[0, 7, 0]} scale={0.03}>
+            {meshes.map((mesh) =>
+            {
+                let color = mesh._rgb.code;
+                let wireframe = mesh._rgb.wire;
+
+                if (modifyMesh) {
+                    const modifications = modifyMesh(mesh);
+                    if (modifications.color) color = modifications.color;
+                    if (typeof modifications.wireframe === "boolean") wireframe = modifications.wireframe;
+                }
+
+                return (
+                    <mesh key={mesh.id} geometry={mesh._geo}>
+                        <meshStandardMaterial color={color} wireframe={wireframe} />
+                    </mesh>
+                );
+            })}
+        </group>
+    );
+};
+
+export default MeshRenderer;

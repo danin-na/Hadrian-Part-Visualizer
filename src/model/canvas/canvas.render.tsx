@@ -1,13 +1,13 @@
 import { Canvas } from '@react-three/fiber';
 import
-    {
-        ContactShadows,
-        Float,
-        OrbitControls,
-        PresentationControls,
-        Environment,
-        Grid,
-    } from '@react-three/drei';
+{
+    ContactShadows,
+    Float,
+    OrbitControls,
+    PresentationControls,
+    Environment,
+    Grid,
+} from '@react-three/drei';
 import { INTERF_Canvas_Render } from './canvas.interface';
 
 export const CanvasRender = ({ config, children }: INTERF_Canvas_Render) =>
@@ -39,8 +39,8 @@ export const CanvasRender = ({ config, children }: INTERF_Canvas_Render) =>
             {grid?.enabled && (
                 <Grid
                     args={[grid.size || 10, grid.divisions || 10]}
-                    cellColor={grid.color || '#ffffff'}
-                    sectionColor={grid.color || '#ffffff'}
+                    cellColor={grid.color || '#000000'}
+                    sectionColor={grid.color || '#000000'}
                     fadeDistance={grid.fadeDistance || 30}
                     infiniteGrid={grid.infiniteGrid ?? true}
                 />
