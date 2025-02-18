@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { useFetchGEO, useFetchRGB, useFetchENT, useFetchNBR } from './loader_helper';
-import { interfaceGEO, interfaceRGB, interfaceENT, interfaceNBR } from './loader_interface';
+import { useFetchGEO, useFetchRGB, useFetchENT, useFetchNBR } from './loader.helper';
+import { interfaceGEO, interfaceRGB, interfaceENT, interfaceNBR } from './loader.interface';
 
 const useMesh = () =>
 {
