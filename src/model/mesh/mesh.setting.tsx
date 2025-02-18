@@ -82,31 +82,29 @@ export const MeshSetting: React.FC<MeshSettingProps> = ({ meshConfig, setmeshMod
         );
     };
 
-    const handle_red_with_conditions = () =>
+    // Helper: returns true if the mesh has no convex edge (i.e., is a pocket)
+    const isPocket = (mesh: MeshData) => !mesh._edg.some(edge => edge.convex);
+
+    const handle_special_edges = () =>
     {
-        setmeshModif((prevConfig) =>
-            prevConfig.map((mesh) =>
-            {
-                if (mesh._ent.centerNormal[2] === 1 && mesh._nbr.neighbors_number === 8) {
-                    return {
-                        ...mesh,
-                        _rgb: {
-                            ...mesh._rgb,
-                            code: "red",
-                        },
-                    };
-                } else {
-                    return {
-                        ...mesh,
-                        _rgb: {
-                            ...mesh._rgb,
-                            code: "black",
-                        },
-                    };
-                }
-            })
-        );
+        setmeshModif(prev =>
+        {
+            const neighborIds = new Set(
+                prev.filter(isPocket).flatMap(mesh => mesh._nbr?.neighbors || [])
+            );
+            return prev.map(mesh => ({
+                ...mesh,
+                _rgb: {
+                    ...mesh._rgb,
+                    code: neighborIds.has(mesh.id) ? "yellow" : isPocket(mesh) ? "red" : "black",
+                },
+            }));
+        });
     };
+
+
+
+
 
     return (
         <div className="flex flex-wrap gap-2">
@@ -116,8 +114,7 @@ export const MeshSetting: React.FC<MeshSettingProps> = ({ meshConfig, setmeshMod
             <Button onClick={handle_reset_colors}>  Reset Colors</Button>
             <Button onClick={handle_wireframe_all}> Wireframe ON</Button>
             <Button onClick={handle_wireframe_off}> Wireframe Off</Button>
-
-            <Button onClick={handle_red_with_conditions}>Yellow Meshes</Button>
+            <Button onClick={handle_special_edges}>Special Edges</Button>
         </div>
     );
 };

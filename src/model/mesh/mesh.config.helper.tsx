@@ -88,7 +88,6 @@ export const useFetchEDG = async (url: string) =>
         .value();
 };
 
-
 export const useFetchNBR = async (url: string) =>
 {
     const response = await fetch(url);
