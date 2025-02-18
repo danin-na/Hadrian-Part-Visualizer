@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-interface interfaceRGB
+interface INTERF_RGB
 {
     id: string;
     rgb: {
@@ -8,14 +8,14 @@ interface interfaceRGB
     }
 }
 
-interface interfaceGEO
+interface INTERF_GEO
 {
     id: string
     name: string
     geo: THREE.BufferGeometry
 }
 
-interface interfaceENT
+interface INTERF_ENT
 {
     id: string
     ent: {
@@ -31,7 +31,7 @@ interface interfaceENT
     }
 }
 
-interface interfaceNBR
+interface INTERF_NBR
 {
     id: string
     nbr:
@@ -43,8 +43,8 @@ interface interfaceNBR
 
 export type
 {
-    interfaceENT,
-    interfaceGEO,
-    interfaceNBR,
-    interfaceRGB
+    INTERF_ENT,
+    INTERF_GEO,
+    INTERF_NBR,
+    INTERF_RGB
 }

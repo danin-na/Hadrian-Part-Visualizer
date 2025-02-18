@@ -1,8 +1,8 @@
 import _ from "lodash";
 import * as THREE from "three";
-import { interfaceGEO, interfaceRGB, interfaceENT, interfaceNBR } from "./loader.interface";
+import { INTERF_GEO, INTERF_RGB, INTERF_ENT, INTERF_NBR } from "./loader.interface";
 
-const useFetchGEO = async (group: THREE.Group): Promise<interfaceGEO[]> =>
+const useFetchGEO = async (group: THREE.Group): Promise<INTERF_GEO[]> =>
 {
     const meshes: THREE.Mesh[] = [];
     group.traverse((obj) =>
@@ -27,7 +27,7 @@ const useFetchGEO = async (group: THREE.Group): Promise<interfaceGEO[]> =>
     return newGEO;
 };
 
-const useFetchRGB = async (url: string): Promise<interfaceRGB[]> =>
+const useFetchRGB = async (url: string): Promise<INTERF_RGB[]> =>
 {
     const response = await fetch(url);
     const data = await response.json();
@@ -48,7 +48,7 @@ const useFetchRGB = async (url: string): Promise<interfaceRGB[]> =>
     return newRGB;
 };
 
-const useFetchNBR = async (url: string): Promise<interfaceNBR[]> =>
+const useFetchNBR = async (url: string): Promise<INTERF_NBR[]> =>
 {
     const response = await fetch(url);
     const data = await response.json();
@@ -68,7 +68,7 @@ const useFetchNBR = async (url: string): Promise<interfaceNBR[]> =>
     return newNBR;
 };
 
-const useFetchENT = async (url: string): Promise<interfaceENT[]> =>
+const useFetchENT = async (url: string): Promise<INTERF_ENT[]> =>
 {
     const response = await fetch(url);
     const data = await response.json();

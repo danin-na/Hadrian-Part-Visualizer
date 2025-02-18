@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useMesh from "./model/loader/loader";
+
 import Loading from "./components/ui/loading";
 import Model from "./model";
 import { Sphere, Box, Cylinder, Cone, Torus } from "@react-three/drei";
@@ -8,9 +8,8 @@ import { Sphere, Box, Cylinder, Cone, Torus } from "@react-three/drei";
 
 const App = () =>
 {
-  const { loading } = useMesh();
+  const { loading } = Model.Loader.Fetch();
 
-  // Assume Model.Canvas.Config is compatible with CanvasConfig.
   const [canvasConfig, setCanvasConfig] = useState<any>(Model.Canvas.Config);
 
   if (loading) return <Loading />;

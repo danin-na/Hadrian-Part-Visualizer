@@ -2,14 +2,14 @@ import _ from 'lodash';
 import { useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFetchGEO, useFetchRGB, useFetchENT, useFetchNBR } from './loader.helper';
-import { interfaceGEO, interfaceRGB, interfaceENT, interfaceNBR } from './loader.interface';
+import { INTERF_GEO, INTERF_RGB, INTERF_ENT, INTERF_NBR } from './loader.interface';
 
-const useMesh = () =>
+export const useMesh = () =>
 {
-    const [GEO, setGEO] = useState<interfaceGEO[]>([]);
-    const [RGB, setRGB] = useState<interfaceRGB[]>([]);
-    const [ENT, setENT] = useState<interfaceENT[]>([]);
-    const [NBR, setNBR] = useState<interfaceNBR[]>([]);
+    const [GEO, setGEO] = useState<INTERF_GEO[]>([]);
+    const [RGB, setRGB] = useState<INTERF_RGB[]>([]);
+    const [ENT, setENT] = useState<INTERF_ENT[]>([]);
+    const [NBR, setNBR] = useState<INTERF_NBR[]>([]);
     const [MESH, setMESH] = useState<any[]>([]);
     const [loading, setLoading] = useState(true); // Track loading state
 
@@ -53,5 +53,3 @@ const useMesh = () =>
 
     return { MESH, loading };
 };
-
-export default useMesh;
