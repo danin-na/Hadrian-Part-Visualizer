@@ -1,20 +1,26 @@
 import { CanvasRender } from "./canvas/canvas.render";
 import { CanvasConfig } from "./canvas/canvas.config";
 import { CanvasSetting } from "./canvas/canvas.setting";
-import { useMesh } from "./loader/loader.fetch";
+
+import { MeshConfig } from "./mesh/mesh.config";
+import { InfoRender } from "./info/info.render";
 
 
 const Model =
 {
-    Loader:
-    {
-        Fetch: useMesh,
-    },
     Canvas:
     {
         Render: CanvasRender,
         Setting: CanvasSetting,
         Config: CanvasConfig
+    },
+    Mesh:
+    {
+        Config: MeshConfig,
+    },
+    Info:
+    {
+        Render: InfoRender
     }
 };
 

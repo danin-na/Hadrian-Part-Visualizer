@@ -38,7 +38,10 @@ export const useFetchRGB = async (url: string) =>
             const [R, G, B] = code.split('-');
             return {
                 id: String(id),
-                _rgb: { code: `rgb(${R},${G},${B})` },
+                _rgb: {
+                    code: `rgb(${R},${G},${B})`,
+                    wire: false,
+                },
             };
         })
         .sortBy(item => Number(item.id))
@@ -52,12 +55,13 @@ export const useFetchNBR = async (url: string) =>
     const response = await fetch(url);
     const data = await response.json();
 
+
     const newNBR = _.chain(data)
         .toPairs()
         .map(([id, neighbors]) => ({
             id: String(id),
             _nbr: {
-                neighbors: [String(neighbors)],
+                neighbors: neighbors.map((nbr: number) => String(nbr)),
                 neighbors_number: neighbors.length,
             },
         }))

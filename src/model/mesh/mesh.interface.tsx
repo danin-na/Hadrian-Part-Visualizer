@@ -1,50 +1,24 @@
 import * as THREE from "three";
 
-interface RenderMeshProps
+export interface INTERF_MESH
 {
-    meshes: {
-        meshA: { geo: THREE.Mesh; wireframe: boolean; color?: string };
-        meshB?: { geo: THREE.Mesh; wireframe: boolean; color?: string };
-    };
-    onMeshClick?: (mesh: any) => void;
+    id: string;
+    name: string;
+    _rgb: { code: string };
+    _geo: THREE.Mesh;
+    _ent: any;
+    _nbr: { neighbors: string[]; neighbors_number: number };
 }
 
-export const RenderMesh = ({
-    meshes: { meshA, meshB }, onMeshClick = () => { }, }: RenderMeshProps) => (
-    <>
+// Simplified config with meshA and meshB at the top level
+export interface INTERF_MESH_CONFIG
+{
+    meshA?: { mesh: INTERF_MESH[]; wireframe: boolean; color?: string };
+    meshB?: { mesh: INTERF_MESH[]; wireframe: boolean; color?: string };
+}
 
-        {meshA && (
-            <group name="meshA">
-                {meshA.geo.map((M) => (
-                    <mesh
-                        key={M.id}
-                        geometry={M.geo}
-                        onClick={() => onMeshClick(M)}
-                    >
-                        <meshStandardMaterial
-                            color={meshA.color || M.rgb?.code}
-                            wireframe={meshA.wireframe}
-                        />
-                    </mesh>
-                ))}
-            </group>
-        )}
-
-        {meshB && (
-            <group name="meshB">
-                {meshB.geo.map((M) => (
-                    <mesh
-                        key={M.id}
-                        geometry={M.geo}
-                        onClick={() => onMeshClick(M)}
-                    >
-                        <meshStandardMaterial
-                            color={meshB.color || M.rgb?.code}
-                            wireframe={meshB.wireframe}
-                        />
-                    </mesh>
-                ))}
-            </group>
-        )}
-    </>
-);
+export interface INTERF_MESH_RENDER
+{
+    data: INTERF_MESH_CONFIG;
+    onMeshClick?: (mesh: INTERF_MESH) => void;
+}

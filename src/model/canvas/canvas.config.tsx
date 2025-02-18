@@ -3,7 +3,7 @@ import { INTERF_Canvas_Config } from "./canvas.interface";
 
 export const CanvasConfig: INTERF_Canvas_Config = {
     camera: {
-        position: [200, 200, 200],
+        position: [20, 25, 20],
         fov: 70,
     },
     background: '#333333',
@@ -19,14 +19,14 @@ export const CanvasConfig: INTERF_Canvas_Config = {
         snap: { mass: 4, tension: 400 },
     },
     float: {
-        rotationIntensity: 2,
+        rotationIntensity: 0.1,
     },
     shadow: {
-        position: [0, -1.2, 0],
-        opacity: 0.7,
-        scale: 10,
-        blur: 1.8,
-        far: 2,
+        position: [0, -1.5, 0],
+        opacity: 0.8,
+        scale: 15,
+        blur: 5,
+        far: 5,
     },
     environment: {
         preset: 'city',
@@ -34,10 +34,10 @@ export const CanvasConfig: INTERF_Canvas_Config = {
     },
     grid: {
         enabled: true,
-        size: 200,
+        size: 10,
         divisions: 10,
         color: '#333333',
-        fadeDistance: 200,
+        fadeDistance: 55,
         infiniteGrid: true,
     },
 };
