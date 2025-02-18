@@ -1,0 +1,44 @@
+import { ScrollArea } from "@/components/ui/scroll-area";
+import
+{
+  Box,
+} from "lucide-react";
+import
+{
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+
+} from "@/components/ui/command";      
+
+
+const [SM, setSM] = useState<any>(null);
+
+      <Model.Info.Render mesh={SM} />
+
+      <aside className="w-52 flex-none">
+        <Command>
+          <CommandInput placeholder="Search for mesh ..." />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup heading="Suggestions">
+              <ScrollArea className="h-dvh pl-2 pr-3 pb-24">
+                {meshConfig.map((M) => (
+                  <CommandItem
+                    key={M.name}
+                    value={M.name}
+                    onSelect={() => setSM(M)} // Set selected mesh on click
+                  >
+                    <Box color={M._rgb.code} className="size-1/2" /> {M.name}
+                  </CommandItem>
+                ))}
+              </ScrollArea>
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </aside>
+
+      <Perf showGraph style={{ "position": "absolute", "bottom": "2rem", "top": "auto", "right": "3rem" }} />

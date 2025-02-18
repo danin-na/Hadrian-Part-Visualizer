@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import _ from 'lodash';
+import { useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFetchGEO, useFetchRGB, useFetchENT, useFetchNBR } from './mesh.config.helper';
 
@@ -36,5 +36,5 @@ export function MeshConfig (url: string)
         })();
     }, [scene]);
 
-    return { meshConfig, meshConfig_loading };
+    return [meshConfig, meshConfig_loading];
 }
