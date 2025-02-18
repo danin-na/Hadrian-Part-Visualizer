@@ -11,7 +11,6 @@ import
 import
 {
   Command,
-
   CommandEmpty,
   CommandGroup,
   CommandInput,
@@ -20,7 +19,7 @@ import
 
 } from "@/components/ui/command";
 
-
+import { Perf } from 'r3f-perf'
 
 const App = () =>
 {
@@ -53,11 +52,14 @@ const App = () =>
       <main className="relative flex-grow">
         <Model.Canvas.Render config={canvasConfig}>
           <MeshRenderer meshes={meshesArray} modifyMesh={modifyMesh} />
+          <Perf showGraph style={{ "position": "absolute", "bottom": "2rem", "top": "auto", "right": "3rem" }} />
         </Model.Canvas.Render>
 
+
         {/* Absolute positioned div at bottom-left */}
-        <div className="absolute bottom-16 right-32 rounded shadow">
+        <div className="absolute bottom-16 left-16 rounded shadow">
           <Model.Canvas.Setting config={canvasConfig} onChange={setCanvasConfig} />
+
         </div>
       </main>
 
