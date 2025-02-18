@@ -1,53 +1,32 @@
 import { Canvas } from '@react-three/fiber';
 import
-{
-    ContactShadows,
-    Float,
-    OrbitControls,
-    PresentationControls,
-    Environment,
-    SoftShadows,
-    Grid,
-} from '@react-three/drei';
+    {
+        ContactShadows,
+        Float,
+        OrbitControls,
+        PresentationControls,
+        Environment,
+        Grid,
+    } from '@react-three/drei';
 import { INTERF_Canvas_Render } from './canvas.interface';
-
 
 export const CanvasRender = ({ config, children }: INTERF_Canvas_Render) =>
 {
     const {
         camera,
         background,
-        fog,
-        ambientLight,
-        directionalLight,
-        pointLight,
-        softShadows,
         orbitControls,
         presentationControls,
         float,
-        contactShadows,
+        shadow,
         environment,
         grid,
     } = config;
 
     return (
         <Canvas shadows camera={{ position: camera.position, fov: camera.fov }} gl={{ antialias: true }}>
-            {/* Background and Fog */}
+            {/* Background */}
             <color args={[background]} attach="background" />
-            <fog attach="fog" args={[fog.color, fog.near, fog.far]} />
-
-            {/* Lighting */}
-            <ambientLight intensity={ambientLight.intensity} />
-            <directionalLight
-                position={directionalLight.position}
-                intensity={directionalLight.intensity}
-                castShadow={directionalLight.castShadow}
-                shadow-mapSize={directionalLight.shadowMapSize}
-            />
-            <pointLight position={pointLight.position} intensity={pointLight.intensity} />
-
-            {/* Soft Shadows */}
-            <SoftShadows size={softShadows.size} focus={softShadows.focus} samples={softShadows.samples} />
 
             {/* Orbit Controls */}
             <OrbitControls
@@ -56,16 +35,18 @@ export const CanvasRender = ({ config, children }: INTERF_Canvas_Render) =>
                 enablePan={orbitControls.enablePan}
             />
 
-            {/* Optional Grid Background */}
+            {/* Cool Infinite Grid */}
             {grid?.enabled && (
                 <Grid
                     args={[grid.size || 10, grid.divisions || 10]}
                     cellColor={grid.color || '#ffffff'}
                     sectionColor={grid.color || '#ffffff'}
+                    fadeDistance={grid.fadeDistance || 30}
+                    infiniteGrid={grid.infiniteGrid ?? true}
                 />
             )}
 
-            {/* Presentation Controls with Floating Children */}
+            {/* Presentation Controls & Floating Children */}
             <PresentationControls
                 global={presentationControls.global}
                 polar={presentationControls.polar}
@@ -79,14 +60,14 @@ export const CanvasRender = ({ config, children }: INTERF_Canvas_Render) =>
 
             {/* Contact Shadows */}
             <ContactShadows
-                position={contactShadows.position}
-                opacity={contactShadows.opacity}
-                scale={contactShadows.scale}
-                blur={contactShadows.blur}
-                far={contactShadows.far}
+                position={shadow.position}
+                opacity={shadow.opacity}
+                scale={shadow.scale}
+                blur={shadow.blur}
+                far={shadow.far}
             />
 
-            {/* Environment Reflections */}
+            {/* Environment */}
             <Environment preset={environment.preset} background={environment.background} />
         </Canvas>
     );
