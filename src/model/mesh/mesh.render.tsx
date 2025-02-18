@@ -11,7 +11,7 @@ const GeoGroup = ({
     onMeshClick: (mesh: any) => void
     groupName: string
 }) => (
-    <group name={groupName}>
+    <group name={groupName} position={[0, 0, 0]}>
         {geo.map((meshData) => (
             <mesh
                 key={meshData.id}

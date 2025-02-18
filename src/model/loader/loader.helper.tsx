@@ -1,8 +1,7 @@
 import _ from "lodash";
 import * as THREE from "three";
-import { INTERF_GEO, INTERF_RGB, INTERF_ENT, INTERF_NBR } from "./loader.interface";
 
-const useFetchGEO = async (group: THREE.Group): Promise<INTERF_GEO[]> =>
+export const useFetchGEO = async (group: THREE.Group) =>
 {
     const meshes: THREE.Mesh[] = [];
     group.traverse((obj) =>
@@ -19,7 +18,7 @@ const useFetchGEO = async (group: THREE.Group): Promise<INTERF_GEO[]> =>
             return {
                 id: String(id),
                 name: mesh.name,
-                geo: mesh.geometry,
+                _geo: mesh.geometry,
             };
         })
         .value();
@@ -27,7 +26,7 @@ const useFetchGEO = async (group: THREE.Group): Promise<INTERF_GEO[]> =>
     return newGEO;
 };
 
-const useFetchRGB = async (url: string): Promise<INTERF_RGB[]> =>
+export const useFetchRGB = async (url: string) =>
 {
     const response = await fetch(url);
     const data = await response.json();
@@ -39,7 +38,7 @@ const useFetchRGB = async (url: string): Promise<INTERF_RGB[]> =>
             const [R, G, B] = code.split('-');
             return {
                 id: String(id),
-                rgb: { code: `rgb(${R},${G},${B})` },
+                _rgb: { code: `rgb(${R},${G},${B})` },
             };
         })
         .sortBy(item => Number(item.id))
@@ -48,7 +47,7 @@ const useFetchRGB = async (url: string): Promise<INTERF_RGB[]> =>
     return newRGB;
 };
 
-const useFetchNBR = async (url: string): Promise<INTERF_NBR[]> =>
+export const useFetchNBR = async (url: string) =>
 {
     const response = await fetch(url);
     const data = await response.json();
@@ -57,7 +56,7 @@ const useFetchNBR = async (url: string): Promise<INTERF_NBR[]> =>
         .toPairs()
         .map(([id, neighbors]) => ({
             id: String(id),
-            nbr: {
+            _nbr: {
                 neighbors: [String(neighbors)],
                 neighbors_number: neighbors.length,
             },
@@ -68,7 +67,7 @@ const useFetchNBR = async (url: string): Promise<INTERF_NBR[]> =>
     return newNBR;
 };
 
-const useFetchENT = async (url: string): Promise<INTERF_ENT[]> =>
+export const useFetchENT = async (url: string) =>
 {
     const response = await fetch(url);
     const data = await response.json();
@@ -76,7 +75,7 @@ const useFetchENT = async (url: string): Promise<INTERF_ENT[]> =>
     const newENT = _.chain(data)
         .map((ent) => ({
             id: ent.entityId,
-            ent: {
+            _ent: {
                 type: ent.entityType,
                 centerUv: ent.centerUv,
                 centerPoint: ent.centerPoint,
@@ -93,11 +92,3 @@ const useFetchENT = async (url: string): Promise<INTERF_ENT[]> =>
 
     return newENT;
 };
-
-export
-{
-    useFetchGEO,
-    useFetchRGB,
-    useFetchENT,
-    useFetchNBR
-}

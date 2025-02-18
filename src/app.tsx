@@ -8,7 +8,9 @@ import { Sphere, Box, Cylinder, Cone, Torus } from "@react-three/drei";
 
 const App = () =>
 {
-  const { loading } = Model.Loader.Fetch();
+  const { loading } = Model.Loader.Fetch('./colored_glb.glb');
+
+
 
   const [canvasConfig, setCanvasConfig] = useState<any>(Model.Canvas.Config);
 
