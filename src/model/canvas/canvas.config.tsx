@@ -3,7 +3,7 @@ import { INTERF_Canvas_Config } from "./canvas.interface";
 
 export const CanvasConfig: INTERF_Canvas_Config = {
     camera: {
-        position: [10, 10, 10],
+        position: [200, 200, 200],
         fov: 70,
     },
     background: '#333333',
@@ -34,10 +34,10 @@ export const CanvasConfig: INTERF_Canvas_Config = {
     },
     grid: {
         enabled: true,
-        size: 10,
+        size: 200,
         divisions: 10,
         color: '#333333',
-        fadeDistance: 30,
+        fadeDistance: 200,
         infiniteGrid: true,
     },
 };
