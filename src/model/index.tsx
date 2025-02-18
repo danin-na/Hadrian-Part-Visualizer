@@ -3,7 +3,9 @@ import { CanvasConfig } from "./canvas/canvas.config";
 import { CanvasSetting } from "./canvas/canvas.setting";
 
 import { MeshConfig } from "./mesh/mesh.config";
+
 import { InfoRender } from "./info/info.render";
+import { InfoPerformance } from "./info/info.performance";
 
 
 const Model =
@@ -20,7 +22,8 @@ const Model =
     },
     Info:
     {
-        Render: InfoRender
+        Render: InfoRender,
+        Performance: InfoPerformance
     }
 };
 
