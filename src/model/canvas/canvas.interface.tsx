@@ -1,35 +1,10 @@
-
 export interface INTERF_Canvas_Config
 {
-
     camera: {
         position: [number, number, number];
         fov: number;
     };
     background: string;
-    fog: {
-        color: string;
-        near: number;
-        far: number;
-    };
-    ambientLight: {
-        intensity: number;
-    };
-    directionalLight: {
-        position: [number, number, number];
-        intensity: number;
-        castShadow: boolean;
-        shadowMapSize: [number, number];
-    };
-    pointLight: {
-        position: [number, number, number];
-        intensity: number;
-    };
-    softShadows: {
-        size: number;
-        focus: number;
-        samples: number;
-    };
     orbitControls: {
         minPolarAngle: number;
         maxPolarAngle: number;
@@ -50,7 +25,7 @@ export interface INTERF_Canvas_Config
     float: {
         rotationIntensity: number;
     };
-    contactShadows: {
+    shadow: {
         position: [number, number, number];
         opacity: number;
         scale: number;
@@ -58,7 +33,17 @@ export interface INTERF_Canvas_Config
         far: number;
     };
     environment: {
-        preset: "apartment" | "city" | "dawn" | "forest" | "lobby" | "night" | "park" | "studio" | "sunset" | "warehouse";
+        preset:
+        | "apartment"
+        | "city"
+        | "dawn"
+        | "forest"
+        | "lobby"
+        | "night"
+        | "park"
+        | "studio"
+        | "sunset"
+        | "warehouse";
         background: boolean;
     };
     grid?: {
@@ -66,12 +51,13 @@ export interface INTERF_Canvas_Config
         size?: number;
         divisions?: number;
         color?: string;
+        fadeDistance?: number;
+        infiniteGrid?: boolean;
     };
-
 }
 
 export interface INTERF_Canvas_Render
 {
-    config: INTERF_Canvas_Config
+    config: INTERF_Canvas_Config;
     children?: React.ReactNode;
 }
