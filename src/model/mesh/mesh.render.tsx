@@ -18,7 +18,7 @@ interface MeshRendererProps
     meshes: MeshData[];
 }
 
-const MeshRenderer: React.FC<MeshRendererProps> = ({ meshes }) =>
+export const MeshRender: React.FC<MeshRendererProps> = ({ meshes }) =>
 {
     return (
         <group position={[0, 7, 0]} scale={0.03}>
@@ -34,4 +34,3 @@ const MeshRenderer: React.FC<MeshRendererProps> = ({ meshes }) =>
     );
 };
 
-export default MeshRenderer;

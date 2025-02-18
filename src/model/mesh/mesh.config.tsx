@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { useFetchGEO, useFetchRGB, useFetchENT, useFetchNBR } from './mesh.config.helper';
+import { useFetchGEO, useFetchRGB, useFetchENT, useFetchNBR, useFetchEDG } from './mesh.config.helper';
 
 
 export function MeshConfig (url: string)
@@ -17,18 +17,20 @@ export function MeshConfig (url: string)
 
         (async () =>
         {
-            const [GEO, RGB, ENT, NBR] = await Promise.all([
+            const [GEO, RGB, ENT, EDG, NBR] = await Promise.all([
                 useFetchGEO(scene),
                 useFetchRGB('./rgb_id_to_entity_id_map.json'),
                 useFetchENT('./entity_geometry_info.json'),
+                useFetchEDG('./adjacency_graph_edge_metadata.json'),
                 useFetchNBR('./adjacency_graph.json'),
             ]);
 
+            console.log('EDG', EDG)
             // optional artificial delay
             await new Promise(resolve => setTimeout(resolve, 1000));
 
 
-            const mergedData = _.merge([], GEO, RGB, ENT, NBR);
+            const mergedData = _.merge([], GEO, RGB, ENT, EDG, NBR);
 
             console.log('✅ useMeshConfig DONE', mergedData);
             setMeshConfig(mergedData);

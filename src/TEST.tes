@@ -41,4 +41,4 @@ const [SM, setSM] = useState<any>(null);
         </Command>
       </aside>
 
-      <Perf showGraph style={{ "position": "absolute", "bottom": "2rem", "top": "auto", "right": "3rem" }} />
+      

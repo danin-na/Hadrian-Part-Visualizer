@@ -1,12 +1,13 @@
 import { CanvasRender } from "./canvas/canvas.render";
-import { CanvasConfig } from "./canvas/canvas.config";
 import { CanvasSetting } from "./canvas/canvas.setting";
+import { CanvasConfig } from "./canvas/canvas.config";
 
+import { MeshRender } from "./mesh/mesh.render";
+import { MeshSetting } from "./mesh/mesh.setting";
 import { MeshConfig } from "./mesh/mesh.config";
 
 import { InfoRender } from "./info/info.render";
 import { InfoPerformance } from "./info/info.performance";
-
 
 const Model =
 {
@@ -18,6 +19,8 @@ const Model =
     },
     Mesh:
     {
+        Render: MeshRender,
+        Setting: MeshSetting,
         Config: MeshConfig,
     },
     Info:
