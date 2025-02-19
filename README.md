@@ -1,51 +1,40 @@
-# React + TypeScript + Vite
+# 3D Object Renderer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation
+```sh
+npm install
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Overview
+Render 3D objects and visualize them down to every single component. Get real-time performance insights with an interactive UI/UX.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Features
+- **Real-time 3D Rendering**: Utilize `@react-three/fiber` and `three.js` to render objects dynamically.
+- **Component-Level Visualization**: View each mesh and fetch metadata with ease.
+- **Style Customization**: Change colors, lighting, and grid settings interactively.
+- **Pocket Finder Algorithm**: Identify and visualize pockets in various styles.
+- **Performance Monitoring**: Track CPU, GPU, and frame rates effortlessly.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
-# Hadrian-Part-Visualizer
+## Tech Stack
+- `vite`: ^5.4.10
+- `react`: ^18.3.1
+- `three.js`: 0.173.0
+- `@react-three/drei`: ^9.121.5
+- `@react-three/fiber`: ^8.17.14
+- `lodash`: ^4.17.21
+
+## UI/UX Features
+- Intuitive interactions with 3D canvas.
+- Toggle visualization styles dynamically.
+- Performance bar for real-time application monitoring.
+
+## Screenshots
+![Screenshot 1](20250218_18244007.png)
+![Screenshot 2](20250218_18245954.png)
+![Screenshot 3](20250218_18251755.png)
+![Screenshot 4](20250218_18261463.png)
+![Screenshot 5](20250218_18265364.png)
+
+---
+Developed by Danin Na
