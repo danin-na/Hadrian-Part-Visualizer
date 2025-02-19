@@ -5,8 +5,9 @@ import Model from "./model";
 const App = () =>
 {
   const [meshConfig, meshConfig_loading] = Model.Mesh.Config("./colored_glb.glb");
-  const [meshModif, setmeshModif] = useState<any>([]);
-  const [canvasConfig, setCanvasConfig] = useState<any>(Model.Canvas.Config);
+  const [meshModif, setmeshModif] = useState<any[]>([]);
+  const [canvasConfig, setCanvasConfig] = useState(Model.Canvas.Config);
+  const [SM, setSM] = useState<any | null>(null);
 
   useEffect(() =>
   {
@@ -31,6 +32,11 @@ const App = () =>
             <Model.Mesh.Setting meshConfig={meshConfig} setmeshModif={setmeshModif} />
           </div>
         </main>
+
+        <Model.Info.Render mesh={SM} />
+
+        <Model.Info.MeshList meshConfig={meshConfig} setSM={setSM} setmeshModif={setmeshModif} />
+
       </div>
     </Model.Mesh.Loading>
   );
