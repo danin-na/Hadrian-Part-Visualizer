@@ -1,32 +1,22 @@
-// App.tsx
 import { useState, useEffect } from "react";
-import Loading from "./components/ui/loading";
 import Model from "./model";
+
 
 const App = () =>
 {
-
   const [meshConfig, meshConfig_loading] = Model.Mesh.Config("./colored_glb.glb");
   const [meshModif, setmeshModif] = useState<any>([]);
   const [canvasConfig, setCanvasConfig] = useState<any>(Model.Canvas.Config);
 
   useEffect(() =>
   {
-    if (!meshConfig) return
+    if (!meshConfig) return;
     setmeshModif(meshConfig);
-
   }, [meshConfig, meshConfig_loading]);
 
-
-  if (meshConfig_loading)
-
-    return <Loading />
-
-  else
-
-    return (
+  return (
+    <Model.Mesh.Loading isLoading={meshConfig_loading}>
       <div className="flex h-screen w-full gap-1">
-
         <main className="relative flex-grow">
           <Model.Canvas.Render config={canvasConfig}>
             <Model.Mesh.Render meshes={meshModif} />
@@ -41,10 +31,9 @@ const App = () =>
             <Model.Mesh.Setting meshConfig={meshConfig} setmeshModif={setmeshModif} />
           </div>
         </main>
-
       </div>
-    );
-
+    </Model.Mesh.Loading>
+  );
 };
 
 export default App;

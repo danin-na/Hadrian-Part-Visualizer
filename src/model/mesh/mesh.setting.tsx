@@ -409,23 +409,23 @@ export const MeshSetting: React.FC<MeshSettingProps> = ({ meshConfig, setmeshMod
                             <PaintBucket className="mr-2 size-4" />
                             Top Direction
                         </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="top" onClick={handle_side_bottom}>
+                        <DropdownMenuRadioItem value="bottom" onClick={handle_side_bottom}>
                             <PaintBucket className="mr-2 size-4" />
                             Bottom Direction
                         </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="back" onClick={handle_side_left}>
+                        <DropdownMenuRadioItem value="left" onClick={handle_side_left}>
                             <PaintBucket className="mr-2 size-4" />
                             Left Direction
                         </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="front" onClick={handle_side_right}>
+                        <DropdownMenuRadioItem value="right" onClick={handle_side_right}>
                             <PaintBucket className="mr-2 size-4" />
                             Right Direction
                         </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="left" onClick={handle_side_front}>
+                        <DropdownMenuRadioItem value="front" onClick={handle_side_front}>
                             <PaintBucket className="mr-2 size-4" />
                             Front Direction
                         </DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="right" onClick={handle_side_back}>
+                        <DropdownMenuRadioItem value="back" onClick={handle_side_back}>
                             <PaintBucket className="mr-2 size-4" />
                             Back Direction
                         </DropdownMenuRadioItem>
