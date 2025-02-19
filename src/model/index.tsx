@@ -9,6 +9,7 @@ import { MeshLoading } from "./mesh/mesh.loading";
 
 import { InfoRender } from "./info/info.render";
 import { InfoPerformance } from "./info/info.performance";
+import { InfoMeshList } from "./info/info.mesh.list";
 
 
 const Model =
@@ -29,7 +30,8 @@ const Model =
     Info:
     {
         Render: InfoRender,
-        Performance: InfoPerformance
+        Performance: InfoPerformance,
+        MeshList: InfoMeshList
     }
 };
 

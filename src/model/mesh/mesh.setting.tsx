@@ -38,12 +38,6 @@ interface MeshSettingProps
 export const MeshSetting: React.FC<MeshSettingProps> = ({ meshConfig, setmeshModif }) =>
 {
 
-
-
-
-
-
-
     /* ----------------
         Parts
     ---------------- */
