@@ -6,7 +6,7 @@ export const CanvasConfig: INTERF_Canvas_Config = {
         position: [20, 25, 20],
         fov: 70,
     },
-    background: '#333333',
+    background: '#cfcfcf',
     orbitControls: {
         minPolarAngle: 0,
         maxPolarAngle: Math.PI / 1.9,
@@ -36,7 +36,7 @@ export const CanvasConfig: INTERF_Canvas_Config = {
         enabled: true,
         size: 10,
         divisions: 10,
-        color: '#333333',
+        color: '#999999',
         fadeDistance: 55,
         infiniteGrid: true,
     },
