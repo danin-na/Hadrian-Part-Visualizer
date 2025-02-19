@@ -5,9 +5,11 @@ import { CanvasConfig } from "./canvas/canvas.config";
 import { MeshRender } from "./mesh/mesh.render";
 import { MeshSetting } from "./mesh/mesh.setting";
 import { MeshConfig } from "./mesh/mesh.config";
+import { MeshLoading } from "./mesh/mesh.loading";
 
 import { InfoRender } from "./info/info.render";
 import { InfoPerformance } from "./info/info.performance";
+
 
 const Model =
 {
@@ -22,6 +24,7 @@ const Model =
         Render: MeshRender,
         Setting: MeshSetting,
         Config: MeshConfig,
+        Loading: MeshLoading
     },
     Info:
     {
