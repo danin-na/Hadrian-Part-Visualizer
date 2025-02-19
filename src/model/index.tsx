@@ -10,6 +10,7 @@ import { MeshLoading } from "./mesh/mesh.loading";
 import { InfoRender } from "./info/info.render";
 import { InfoPerformance } from "./info/info.performance";
 import { InfoMeshList } from "./info/info.mesh.list";
+import { AppSidebar } from "./sidebar.tsx/sidebar";
 
 
 const Model =
@@ -32,6 +33,10 @@ const Model =
         Render: InfoRender,
         Performance: InfoPerformance,
         MeshList: InfoMeshList
+    },
+    Sidebar:
+    {
+        Render: AppSidebar
     }
 };
 
