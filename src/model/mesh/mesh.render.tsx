@@ -27,6 +27,7 @@ export const MeshRender: React.FC<MeshRendererProps> = ({ meshes }) =>
                     <meshStandardMaterial
                         color={mesh._rgb.code}
                         wireframe={mesh._rgb.wire}
+                        side={THREE.DoubleSide}
                     />
                 </mesh>
             ))}
