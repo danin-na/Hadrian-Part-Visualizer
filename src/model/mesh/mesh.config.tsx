@@ -25,7 +25,6 @@ export function MeshConfig (url: string)
                 useFetchNBR('./adjacency_graph.json'),
             ]);
 
-            console.log('EDG', EDG)
             // optional artificial delay
             await new Promise(resolve => setTimeout(resolve, 1000));
 
