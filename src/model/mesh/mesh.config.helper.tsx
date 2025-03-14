@@ -67,6 +67,8 @@ export const useFetchEDG = async (url: string) =>
         .uniqBy((edge: any) => edge.id1 + '-' + edge.id2)
         .value();
 
+    console.log(uniqueEdges)
+
     const nodes: any = {};
     _.forEach(uniqueEdges, ({ id1, id2, value }: any) =>
     {
